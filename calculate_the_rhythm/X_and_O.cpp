@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <vector>
 
 int getParameter(std::string number_of){
     int tmp;
@@ -24,34 +25,30 @@ std::string getOutBiggestXOrOs(std::string x_or_o, int number){
     return (tmp);
 }
 
-void print(std::string symbol, int number){
+std::vector<std::string> fill(std::vector<std::string> tmp, std::string symbol, int number){
     while (number-- > 0){
-        std::cout << symbol;
+        tmp.push_back(symbol);
     }
+    return tmp;
 }
 
-void calculate(int biggest, int smaller, std::string biggest_sym, std::string smaller_sym){
-    int tmp = smaller;
-    while (tmp > 0){
-        print(smaller_sym, 1);
-        print(biggest_sym, (biggest / smaller));
-        tmp--;
-        if (biggest % smaller != 0 && tmp > 0){
-            print(smaller_sym, 1);
-            print(biggest_sym, (biggest % smaller));
-            tmp--;
-        }
-    }
+std::string calculate(int biggest, int smaller, std::string biggest_sym, std::string smaller_sym){
+    std::vector<std::string> tmp;
+
+    tmp = fill(tmp, smaller_sym, smaller);
+    tmp = fill(tmp, biggest_sym, biggest);
+    //REALISATION
+    return (tmp);
 }
 
-void getRythm(int x, int o){
+std::string getRythm(int x, int o){
     if (x > o){
-        calculate(x, o, "x", "o");
+        return (calculate(x, o, "x", "o"));
     }else
-        calculate(o, x, "o", "x");
+        return (calculate(o, x, "o", "x"));
 
 }
 
 int main(void){
-    getRythm(getParameter("x"), getParameter("o"));
+    std::cout << getRythm(getParameter("x"), getParameter("o"));
 }
